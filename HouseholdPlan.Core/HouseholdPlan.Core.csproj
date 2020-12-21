@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>HouseholdPlan.Core</AssemblyName>
+    <RootNamespace>HouseholdPlan.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HouseholdPlan.Data\HouseholdPlan.Data.csproj" />
+  </ItemGroup>
+
+</Project>
