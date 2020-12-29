@@ -4,6 +4,7 @@ using HouseholdPlan.Data.Constants;
 using HouseholdPlan.Data.Entities.Work;
 using NUnit.Framework;
 using System;
+using System.Globalization;
 
 namespace HouseholdPlan.Core.Test.Services.Work
 {
@@ -14,7 +15,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
         {
             ProcessingTimeEntity processingTime = HouseholdTaskTest.GetProcessingTime();
 
-            processingTime.InitialDate = DateTime.Parse("01.01.2020 12:00:00");
+            processingTime.InitialDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             processingTime.Replay = ProcessingDateReplay.Once;
 
             NextWorkingTimeService service = new NextWorkingTimeService
@@ -22,7 +23,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
                 ProcessingTime = processingTime
             };
 
-            DateTime expectedDate = DateTime.Parse("01.01.2020 12:00:00");
+            DateTime expectedDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             DateTime actualDate = service.GetNextWorkingTime();
 
             Assert.IsNotNull(actualDate);
@@ -34,7 +35,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
         {
             ProcessingTimeEntity processingTime = HouseholdTaskTest.GetProcessingTime();
 
-            processingTime.InitialDate = DateTime.Parse("01.01.2020 12:00:00");
+            processingTime.InitialDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             processingTime.Replay = ProcessingDateReplay.Daily;
 
             NextWorkingTimeService service = new NextWorkingTimeService
@@ -42,7 +43,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
                 ProcessingTime = processingTime
             };
 
-            DateTime expectedDate = DateTime.Parse("02.01.2020 12:00:00");
+            DateTime expectedDate = DateTime.ParseExact("02.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             DateTime actualDate = service.GetNextWorkingTime();
 
             Assert.IsNotNull(actualDate);
@@ -54,7 +55,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
         {
             ProcessingTimeEntity processingTime = HouseholdTaskTest.GetProcessingTime();
 
-            processingTime.InitialDate = DateTime.Parse("01.01.2020 12:00:00");
+            processingTime.InitialDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             processingTime.Replay = ProcessingDateReplay.Weekly;
 
             NextWorkingTimeService service = new NextWorkingTimeService
@@ -62,7 +63,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
                 ProcessingTime = processingTime
             };
 
-            DateTime expectedDate = DateTime.Parse("08.01.2020 12:00:00");
+            DateTime expectedDate = DateTime.ParseExact("08.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             DateTime actualDate = service.GetNextWorkingTime();
 
             Assert.IsNotNull(actualDate);
@@ -74,7 +75,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
         {
             ProcessingTimeEntity processingTime = HouseholdTaskTest.GetProcessingTime();
 
-            processingTime.InitialDate = DateTime.Parse("01.01.2020 12:00:00");
+            processingTime.InitialDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             processingTime.Replay = ProcessingDateReplay.Monthly;
 
             NextWorkingTimeService service = new NextWorkingTimeService
@@ -82,7 +83,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
                 ProcessingTime = processingTime
             };
 
-            DateTime expectedDate = DateTime.Parse("01.02.2020 12:00:00");
+            DateTime expectedDate = DateTime.ParseExact("01.02.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             DateTime actualDate = service.GetNextWorkingTime();
 
             Assert.IsNotNull(actualDate);
@@ -94,7 +95,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
         {
             ProcessingTimeEntity processingTime = HouseholdTaskTest.GetProcessingTime();
 
-            processingTime.InitialDate = DateTime.Parse("01.01.2020 12:00:00");
+            processingTime.InitialDate = DateTime.ParseExact("01.01.2020 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             processingTime.Replay = ProcessingDateReplay.Yearly;
 
             NextWorkingTimeService service = new NextWorkingTimeService
@@ -102,7 +103,7 @@ namespace HouseholdPlan.Core.Test.Services.Work
                 ProcessingTime = processingTime
             };
 
-            DateTime expectedDate = DateTime.Parse("01.01.2021 12:00:00");
+            DateTime expectedDate = DateTime.ParseExact("01.01.2021 12:00:00", "dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture);
             DateTime actualDate = service.GetNextWorkingTime();
 
             Assert.IsNotNull(actualDate);
