@@ -28,5 +28,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gunnerg/household
+        context: .
         file: ./HouseholdPlan.Server/Dockerfile
         tag_with_ref: true
