@@ -30,4 +30,5 @@ jobs:
         repository: gunnerg/household
         context: /home/runner/work/HouseholdPlan/HouseholdPlan/
         file: ./HouseholdPlan.Server/Dockerfile
+        push: true
         tag_with_ref: true
