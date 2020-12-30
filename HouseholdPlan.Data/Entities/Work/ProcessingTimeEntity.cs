@@ -1,5 +1,6 @@
 ﻿using HouseholdPlan.Data.Constants;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HouseholdPlan.Data.Entities.Work
 {
@@ -14,16 +15,19 @@ namespace HouseholdPlan.Data.Entities.Work
         /// Gibt eine Anzahl an welche gewartet wird.
         /// Zum Beispiel alle 3 Tage (Every = 3 Replay Daily)
         /// </summary>
-        public int Every { get; set; }
+        public int Every { get; set; } = 1;
 
         /// <summary>
         /// Wiederholung
         /// </summary>
-        public ProcessingDateReplay Replay { get; set; }
+        public ProcessingDateReplay Replay { get; set; } = ProcessingDateReplay.Daily;
 
         /// <summary>
         /// Startzeitpunkt
         /// </summary>
-        public DateTime InitialDate { get; set; }
+        [Display(Name = "Initial Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "g")]
+        public DateTime InitialDate { get; set; } = DateTime.Now;
     }
 }

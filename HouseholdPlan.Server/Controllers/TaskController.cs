@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HouseholdPlan.Core.Models.Work;
+using HouseholdPlan.Data.Entities.Work;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,13 @@ namespace HouseholdPlan.Server.Controllers
             return new string[] { "value1", "value2" };
         }
 
+        [HttpPost]
+        public ActionResult Post(HouseholdTaskEntity householdTask)
+        {
+
+            return new OkResult();
+        }
+
         // GET api/<MyTasksController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -26,11 +35,11 @@ namespace HouseholdPlan.Server.Controllers
             return "value";
         }
 
-        // POST api/<MyTasksController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<MyTasksController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
         // PUT api/<MyTasksController>/5
         [HttpPut("{id}")]

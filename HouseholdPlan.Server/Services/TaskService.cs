@@ -22,14 +22,17 @@ namespace HouseholdPlan.Server.Services
 
         public void CreateOrUpdateTask(HouseholdTask task)
         {
+            access.CreateOrUpdate(task.ProcessingTime);
+
+            task.ProcessingTimeId = task.ProcessingTime.Id;
             access.CreateOrUpdate(task);
         }
 
         public List<HouseholdTask> GetUserTasks(User user)
         {
             List<HouseholdTask> householdTasks = new List<HouseholdTask>();
-            List<int> taskIds = access.GetHouseholdTasks().Where(h => h.CreatorId == user.Id).Select(h => h.Id).ToList();
-
+            //List<int> taskIds = access.GetHouseholdTasks().Where(h => h.CreatorId == user.Id).Select(h => h.Id).ToList();
+            List<int> taskIds = access.GetHouseholdTasks().Select(h => h.Id).ToList();
             foreach (var taskId in taskIds)
             {
                 householdTasks.Add(householdTaskFactory.LoadHouseholdTask(taskId));

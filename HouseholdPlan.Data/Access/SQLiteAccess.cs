@@ -14,6 +14,7 @@ namespace HouseholdPlan.Data.Access
 
         public SQLiteAccess()
         {
+            CheckIsInit();
         }
 
         public void CheckIsInit()
@@ -22,6 +23,7 @@ namespace HouseholdPlan.Data.Access
             {
                 InitDataBase();
             }
+
         }
 
         public void InitDataBase()
@@ -358,7 +360,7 @@ namespace HouseholdPlan.Data.Access
                     var id = reader.GetInt32(0);
                     var every = reader.GetInt32(1);
                     var replay = ProcessingDateReplayHelper.IdToProcessingDateReplay(reader.GetInt32(2));
-                    var initialDate = reader.GetDateTime(3);
+                    var initialDate = DateTime.Parse(reader.GetString(3));
 
                     output.Add(new ProcessingTimeEntity
                     {

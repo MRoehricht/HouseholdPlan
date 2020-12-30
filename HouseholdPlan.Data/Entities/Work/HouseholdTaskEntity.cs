@@ -1,4 +1,6 @@
-﻿namespace HouseholdPlan.Data.Entities.Work
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HouseholdPlan.Data.Entities.Work
 {
     /// <summary>
     /// Gibt eine Aufgabe an.
@@ -13,11 +15,15 @@
         /// <summary>
         /// Gibt den Titel einer Aufgabe an
         /// </summary>
+        [Display(Name = "Title")]
+        [Required(ErrorMessage = "Title Required!")]
         public string Title { get; set; }
 
         /// <summary>
         /// Gibt die Beschreibung der Aufgabe an
         /// </summary>
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "Description Required!")]
         public string Description { get; set; }
 
         /// <summary>

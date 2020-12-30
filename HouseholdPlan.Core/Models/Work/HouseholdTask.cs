@@ -6,7 +6,7 @@ namespace HouseholdPlan.Core.Models.Work
 {
     public class HouseholdTask : HouseholdTaskEntity
     {
-        private ProcessingTimeEntity processingTime;
+        private ProcessingTimeEntity processingTime = new ProcessingTimeEntity();
 
         public ProcessingTimeEntity ProcessingTime
         {

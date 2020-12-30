@@ -21,6 +21,8 @@ namespace HouseholdPlan.Server.Pages
         {
             _logger = logger;
             _taskService = taskService;
+            HouseholdTasks = taskService.GetUserTasks(null);
+            //HouseholdTasks = new List<HouseholdTask>();
         }
 
 
