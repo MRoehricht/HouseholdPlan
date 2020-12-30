@@ -32,7 +32,7 @@ jobs:
       with:
         context: /home/runner/work/HouseholdPlan/HouseholdPlan/
         file: ./HouseholdPlan.Server/Dockerfile
-        tags: gunnerg/household:latest
+        tags: ${{ secrets.REPO }}/household:0.1
         load: true
     - name: Docker Push
-      run: docker push gunnerg/household:latest
+      run: docker push ${{ secrets.REPO }}/household:0.1
