@@ -28,17 +28,22 @@ namespace HouseholdPlan.Server.Services
             access.CreateOrUpdate(task);
         }
 
-        public List<HouseholdTask> GetUserTasks(User user)
+        public List<HouseholdTask> GetUserTasks(string userGuid)
         {
             List<HouseholdTask> householdTasks = new List<HouseholdTask>();
-            //List<int> taskIds = access.GetHouseholdTasks().Where(h => h.CreatorId == user.Id).Select(h => h.Id).ToList();
-            List<int> taskIds = access.GetHouseholdTasks().Select(h => h.Id).ToList();
+            List<int> taskIds = access.GetHouseholdTasks().Where(h => h.CreatorId == userGuid).Select(h => h.Id).ToList();
+
             foreach (var taskId in taskIds)
             {
                 householdTasks.Add(householdTaskFactory.LoadHouseholdTask(taskId));
             }
 
             return householdTasks;
+        }
+
+        public List<HouseholdTask> GetUserTasks(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

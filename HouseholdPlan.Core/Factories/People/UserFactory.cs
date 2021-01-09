@@ -10,7 +10,7 @@ namespace HouseholdPlan.Core.Factories.People
         {
         }
 
-        public User LoadUser(int id)
+        public User LoadUser(string id)
         {
             User output = null;
 

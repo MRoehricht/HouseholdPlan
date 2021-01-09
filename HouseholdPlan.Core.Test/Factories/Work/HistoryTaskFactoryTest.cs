@@ -42,6 +42,8 @@ namespace HouseholdPlan.Core.Test.Factories.Work
         [Test]
         public void CreateHistoryTasks()
         {
+            var list = access.GetUsers();
+
             UserFactoryTest userFactoryTest = new UserFactoryTest();
             userFactoryTest.CreateUsers(access);
 
@@ -51,9 +53,9 @@ namespace HouseholdPlan.Core.Test.Factories.Work
             HistoryTask historyTask1 = new HistoryTask
             {
                 Date = Time1,
-                EditorId = 1,
+                EditorId = "1",
                 Status = Data.Constants.ProcessingStatus.NotDone,
-                TaskId = 7
+                TaskId = 3
             };
 
             access.CreateOrUpdate(historyTask1);
@@ -61,9 +63,9 @@ namespace HouseholdPlan.Core.Test.Factories.Work
             HistoryTask historyTask2 = new HistoryTask
             {
                 Date = Time2,
-                EditorId = 2,
+                EditorId = "2",
                 Status = Data.Constants.ProcessingStatus.NotDone,
-                TaskId = 8
+                TaskId = 4
             };
 
             access.CreateOrUpdate(historyTask2);

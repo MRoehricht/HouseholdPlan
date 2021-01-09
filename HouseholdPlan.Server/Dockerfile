@@ -8,8 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["HouseholdPlan.Server/HouseholdPlan.Server.csproj", "HouseholdPlan.Server/"]
-COPY ["HouseholdPlan.Core/HouseholdPlan.Core.csproj", "HouseholdPlan.Core/"]
-COPY ["HouseholdPlan.Data/HouseholdPlan.Data.csproj", "HouseholdPlan.Data/"]
 RUN dotnet restore "HouseholdPlan.Server/HouseholdPlan.Server.csproj"
 COPY . .
 WORKDIR "/src/HouseholdPlan.Server"

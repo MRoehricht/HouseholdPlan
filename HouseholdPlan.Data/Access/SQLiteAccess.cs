@@ -106,7 +106,7 @@ namespace HouseholdPlan.Data.Access
             {
                 RunCommand($"DROP TABLE IF EXISTS {TableNames.Users};");
             }
-            RunCommand($"CREATE TABLE {TableNames.Users} (Id INT NOT NULL, Name VARCHAR(150) NULL, PRIMARY KEY (Id));");
+            RunCommand($"CREATE TABLE {TableNames.Users} (Id VARCHAR(50) NOT NULL, Name VARCHAR(150) NULL, PRIMARY KEY (Id));");
             IncrementCounter(CounterNames.UserVersion);
         }
 
@@ -116,7 +116,7 @@ namespace HouseholdPlan.Data.Access
             {
                 RunCommand($"DROP TABLE IF EXISTS {TableNames.HistoryTasks};");
             }
-            RunCommand($"CREATE TABLE {TableNames.HistoryTasks} (Id INT NOT NULL, TaskId INT NOT NULL, EditorId INT NOT NULL, Date DATETIME NOT NULL, Status  INT NOT NULL, PRIMARY KEY (Id));");
+            RunCommand($"CREATE TABLE {TableNames.HistoryTasks} (Id INT NOT NULL, TaskId INT NOT NULL, EditorId VARCHAR(50) NOT NULL, Date DATETIME NOT NULL, Status  INT NOT NULL, PRIMARY KEY (Id));");
             IncrementCounter(CounterNames.HistoryTasksVersion);
         }
 
@@ -126,7 +126,7 @@ namespace HouseholdPlan.Data.Access
             {
                 RunCommand($"DROP TABLE IF EXISTS {TableNames.HouseholdTasks};");
             }
-            RunCommand($"CREATE TABLE {TableNames.HouseholdTasks} (Id INT NOT NULL, Title VARCHAR(350) NOT NULL, Description VARCHAR(1000), ProcessingTimeId INT NOT NULL, CreatorId  INT NOT NULL, PRIMARY KEY (Id));");
+            RunCommand($"CREATE TABLE {TableNames.HouseholdTasks} (Id INT NOT NULL, Title VARCHAR(350) NOT NULL, Description VARCHAR(1000), ProcessingTimeId INT NOT NULL, CreatorId  VARCHAR(50) NOT NULL, PRIMARY KEY (Id));");
             IncrementCounter(CounterNames.HouseholdTasksVersion);
         }
 
@@ -145,7 +145,7 @@ namespace HouseholdPlan.Data.Access
 
         public void CreateOrUpdate(UserEntity user)
         {
-            if (user.Id == 0)
+            if (user.Id == null)
             {
                 CreateUser(user);
             }
@@ -157,14 +157,14 @@ namespace HouseholdPlan.Data.Access
 
         public void CreateUser(UserEntity user)
         {
-            user.Id = GetGlobalCounter();
-            int numberOfRow = RunCommand($"INSERT INTO {TableNames.Users} (Id, Name) VALUES ({user.Id}, '{user.Name}');");
+            ///user.Id = GetGlobalCounter();
+            int numberOfRow = RunCommand($"INSERT INTO {TableNames.Users} (Id, Name) VALUES ('{user.Id}', '{user.Name}');");
             IsRowEffected(numberOfRow, "Beim Erstellen des Nutzers ist ein Fehler aufgetreten.");
         }
 
         public void UpdateUser(UserEntity user)
         {
-            int numberOfRow = RunCommand($"UPDATE {TableNames.Users} SET Name = '{user.Name}' WHERE Id = {user.Id};");
+            int numberOfRow = RunCommand($"UPDATE {TableNames.Users} SET Name = '{user.Name}' WHERE Id = '{user.Id}';");
             IsRowEffected(numberOfRow, "Beim Ändern des Nutzers ist ein Fehler aufgetreten.");
         }
 
@@ -181,7 +181,7 @@ namespace HouseholdPlan.Data.Access
                 using var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    var id = reader.GetInt32(0);
+                    var id = reader.GetString(0);
                     var name = reader.GetString(1);
 
                     output.Add(new UserEntity { Id = id, Name = name });
@@ -210,13 +210,13 @@ namespace HouseholdPlan.Data.Access
         public void CreateHistoryTask(HistoryTaskEntity task)
         {
             task.Id = GetGlobalCounter();
-            int numberOfRow = RunCommand($"INSERT INTO {TableNames.HistoryTasks} (Id, TaskId, EditorId, Date, Status) VALUES ({task.Id}, {task.TaskId}, {task.EditorId}, '{task.Date}', {ProcessingStatusHelper.ProcessingStatusToId(task.Status)} );");
+            int numberOfRow = RunCommand($"INSERT INTO {TableNames.HistoryTasks} (Id, TaskId, EditorId, Date, Status) VALUES ({task.Id}, {task.TaskId}, '{task.EditorId}', '{task.Date}', {ProcessingStatusHelper.ProcessingStatusToId(task.Status)} );");
             IsRowEffected(numberOfRow, "Beim Erstellen des Nutzers ist ein Fehler aufgetreten.");
         }
 
         public void UpdateHistoryTask(HistoryTaskEntity task)
         {
-            int numberOfRow = RunCommand($"UPDATE {TableNames.HistoryTasks} SET TaskId = '{task.TaskId}',EditorId = {task.EditorId}, Date ='{task.Date}', Status = {ProcessingStatusHelper.ProcessingStatusToId(task.Status)}  WHERE Id = {task.Id};");
+            int numberOfRow = RunCommand($"UPDATE {TableNames.HistoryTasks} SET TaskId = '{task.TaskId}',EditorId = '{task.EditorId}', Date ='{task.Date}', Status = {ProcessingStatusHelper.ProcessingStatusToId(task.Status)}  WHERE Id = {task.Id};");
             IsRowEffected(numberOfRow, "Beim Ändern des Nutzers ist ein Fehler aufgetreten.");
         }
 
@@ -235,7 +235,7 @@ namespace HouseholdPlan.Data.Access
                 {
                     var id = reader.GetInt32(0);
                     var taskId = reader.GetInt32(1);
-                    var editorId = reader.GetInt32(2);
+                    var editorId = reader.GetString(2);
                     var date = reader.GetDateTime(3);
                     var status = reader.GetInt32(4);
 
@@ -272,13 +272,13 @@ namespace HouseholdPlan.Data.Access
         public void CreateHouseholdTask(HouseholdTaskEntity task)
         {
             task.Id = GetGlobalCounter();
-            int numberOfRow = RunCommand($"INSERT INTO {TableNames.HouseholdTasks} (Id, Title, Description, ProcessingTimeId, CreatorId) VALUES ({task.Id}, '{task.Title}', '{task.Description}', {task.ProcessingTimeId}, {task.CreatorId} );");
+            int numberOfRow = RunCommand($"INSERT INTO {TableNames.HouseholdTasks} (Id, Title, Description, ProcessingTimeId, CreatorId) VALUES ({task.Id}, '{task.Title}', '{task.Description}', {task.ProcessingTimeId}, '{task.CreatorId}' );");
             IsRowEffected(numberOfRow, "Beim Erstellen des Nutzers ist ein Fehler aufgetreten.");
         }
 
         public void UpdateHouseholdTask(HouseholdTaskEntity task)
         {
-            int numberOfRow = RunCommand($"UPDATE {TableNames.HouseholdTasks} SET Title='{task.Title}', Description='{task.Description}', ProcessingTimeId={task.ProcessingTimeId}, CreatorId={task.CreatorId}  WHERE Id = {task.Id};");
+            int numberOfRow = RunCommand($"UPDATE {TableNames.HouseholdTasks} SET Title='{task.Title}', Description='{task.Description}', ProcessingTimeId={task.ProcessingTimeId}, CreatorId='{task.CreatorId}'  WHERE Id = {task.Id};");
             IsRowEffected(numberOfRow, "Beim Ändern des Nutzers ist ein Fehler aufgetreten.");
         }
 
@@ -299,7 +299,7 @@ namespace HouseholdPlan.Data.Access
                     var title = reader.GetString(1);
                     var description = reader.GetString(2);
                     var processingTimeId = reader.GetInt32(3);
-                    var creatorId = reader.GetInt32(4);
+                    var creatorId = reader.GetString(4);
 
                     output.Add(new HouseholdTaskEntity
                     {

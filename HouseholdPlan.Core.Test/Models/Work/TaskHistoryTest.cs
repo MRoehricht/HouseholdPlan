@@ -12,7 +12,7 @@ namespace HouseholdPlan.Core.Test.Models.Work
         {
             int id = 1;
             int taskId = 2;
-            int editorId = 3;
+            string editorId = "3";
             DateTime date = DateTime.Now;
 
             HistoryTaskEntity taskHistory = new HistoryTaskEntity

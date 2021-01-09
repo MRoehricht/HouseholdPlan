@@ -30,7 +30,7 @@ namespace HouseholdPlan.Core.Test.Models.Work
         }
 
         public const int id = 1;
-        public const int creatorId = 2;
+        public const string creatorId = "2";
         public const int processingTimeId = 3;
         public const string description = "Beschreibung";
         public const string title = "Titel";

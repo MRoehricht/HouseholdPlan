@@ -8,7 +8,7 @@ namespace HouseholdPlan.Core.Test.Models.People
         [Test]
         public void InitTest()
         {
-            int id = 1;
+            string id = "1";
             string name = "Test Name";
 
             UserEntity person = new UserEntity

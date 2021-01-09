@@ -152,33 +152,27 @@ namespace HouseholdPlan.Data.Test.Access
 
             UserEntity user = new UserEntity
             {
+                Id = "1",
                 Name = "Test Nutzer"
             };
 
-            access.CreateOrUpdate(user);
+            access.CreateUser(user);
 
-            Assert.AreEqual(1, user.Id);
-
-            version = access.GetCounter(CounterNames.GlobalCounter);
-            Assert.AreEqual(user.Id + 1, version);
+            Assert.AreEqual("1", user.Id);
 
             user.Name = "Test Nutzer1";
-            access.CreateOrUpdate(user);
 
-            version = access.GetCounter(CounterNames.GlobalCounter);
-            Assert.AreEqual(user.Id + 1, version);
+            access.CreateOrUpdate(user);
 
             UserEntity user2 = new UserEntity
             {
+                Id = "2",
                 Name = "Test Nutzer2"
             };
 
-            access.CreateOrUpdate(user2);
+            access.CreateUser(user2);
 
-            Assert.AreEqual(2, user2.Id);
-
-            version = access.GetCounter(CounterNames.GlobalCounter);
-            Assert.AreEqual(user2.Id + 1, version);
+            Assert.AreEqual("2", user2.Id);
         }
 
         [Test]
@@ -193,12 +187,12 @@ namespace HouseholdPlan.Data.Test.Access
 
             UserEntity user1 = users.First();
 
-            Assert.AreEqual(1, user1.Id);
+            Assert.AreEqual("1", user1.Id);
             Assert.AreEqual("Test Nutzer1", user1.Name);
 
             UserEntity user2 = users.Last();
 
-            Assert.AreEqual(2, user2.Id);
+            Assert.AreEqual("2", user2.Id);
             Assert.AreEqual("Test Nutzer2", user2.Name);
         }
 
@@ -213,7 +207,7 @@ namespace HouseholdPlan.Data.Test.Access
             HistoryTaskEntity task = new HistoryTaskEntity
             {
                 TaskId = 1,
-                EditorId = 2,
+                EditorId = "2",
                 Date = DateTime.Parse("01.01.2020 12:00:00"),
                 Status = ProcessingStatus.InProgress
             };
@@ -234,7 +228,7 @@ namespace HouseholdPlan.Data.Test.Access
             HistoryTaskEntity task2 = new HistoryTaskEntity
             {
                 TaskId = 2,
-                EditorId = 3,
+                EditorId = "3",
                 Date = DateTime.Parse("01.01.2020 13:00:00"),
                 Status = ProcessingStatus.NotDone
             };
@@ -261,7 +255,7 @@ namespace HouseholdPlan.Data.Test.Access
 
             Assert.AreEqual(1, task1.Id);
             Assert.AreEqual(1, task1.TaskId);
-            Assert.AreEqual(2, task1.EditorId);
+            Assert.AreEqual("2", task1.EditorId);
             Assert.AreEqual(DateTime.Parse("01.01.2020 12:00:00"), task1.Date);
             Assert.AreEqual(ProcessingStatus.Done, task1.Status);
 
@@ -269,7 +263,7 @@ namespace HouseholdPlan.Data.Test.Access
 
             Assert.AreEqual(2, task2.Id);
             Assert.AreEqual(2, task2.TaskId);
-            Assert.AreEqual(3, task2.EditorId);
+            Assert.AreEqual("3", task2.EditorId);
             Assert.AreEqual(DateTime.Parse("01.01.2020 13:00:00"), task2.Date);
             Assert.AreEqual(ProcessingStatus.NotDone, task2.Status);
         }

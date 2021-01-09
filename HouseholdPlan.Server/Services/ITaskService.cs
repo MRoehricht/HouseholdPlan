@@ -8,5 +8,6 @@ namespace HouseholdPlan.Server.Services
     {
         void CreateOrUpdateTask(HouseholdTask task);
         List<HouseholdTask> GetUserTasks(User user);
+        List<HouseholdTask> GetUserTasks(string userGuid);
     }
 }

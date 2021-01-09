@@ -7,7 +7,7 @@ namespace HouseholdPlan.Data.Entities.Work
     {
         public int Id { get; set; }
         public int TaskId { get; set; }
-        public int EditorId { get; set; }
+        public string EditorId { get; set; }
         public DateTime Date { get; set; }
         public ProcessingStatus Status { get; set; }
     }

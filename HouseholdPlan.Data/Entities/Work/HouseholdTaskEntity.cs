@@ -34,6 +34,6 @@ namespace HouseholdPlan.Data.Entities.Work
         /// <summary>
         /// Gibt die Id der Ersteller/in an.
         /// </summary>
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; }
     }
 }
