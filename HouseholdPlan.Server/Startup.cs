@@ -31,7 +31,7 @@ namespace HouseholdPlan.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlite("Data Source=HouseholdUsers.db"));
+            options.UseSqlite(@"Data Source=D:\home\site\wwwroot\HouseholdUsers.db"));
             //
             //options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
