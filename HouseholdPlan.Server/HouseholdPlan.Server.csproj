@@ -22,4 +22,10 @@
     <ProjectReference Include="..\HouseholdPlan.Core\HouseholdPlan.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="HouseholdUsers.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
